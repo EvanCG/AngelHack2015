@@ -10,13 +10,14 @@ Get number of In Progress:
 		NumInProgress # The number of jobs in progress
 
 Get number to Follow Up:
-	http://evan.place/getToFollowUp.php
+	http://evan.place/getNumberFollowUp.php
 	Return:
 		NumFollowUps # The number of jobs to follow up with
 	
 Get Table Info about Offers:
 	http://evan.place/getAllOfferDetails.php
 	Return: (Sorted by Deadline, nearest highest)
+		Offer_Id
 		Job_Title
 		Copany
 		Deadline
