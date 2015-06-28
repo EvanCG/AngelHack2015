@@ -1,10 +1,14 @@
 User Creates Job
 	User Input:
-		Job Type
-		Resume
-		Cover Letter
+		Job Title - Job_Title
+		Resume - Resume
+		Cover Letter - Cover_Letter
+		Job Deadline - Job_Deadline
+			When Application is due
 	Retrieve:
-		Company from drop down
-		(If not present, 'other' and user supplied)
+		Company from drop down - Company_Id
+			(If not present, 'other' and user supplied)
+		Job Status ID - Job_Status_Id
+			Based on the fact that user is first creating it
 	Auto:
 		Job ID
