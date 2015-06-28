@@ -10,7 +10,7 @@
 
 		//$sql = "SELECT * FROM exploreuw.TOUR";
 
-		$sql = "SELECT * FROM angelHackDb.Company;";
+		$sql = "SELECT Comp_Name, Comp_Info FROM angelHackDb.Company;";
 		$query = $conn->prepare($sql);
 		$query->execute();
 

@@ -8,7 +8,7 @@
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = "SELECT COUNT(Job_Id) FROM `Job` WHERE Job_Status_Id = 5;";
+		$sql = "SELECT COUNT(Job_Id) as NumOffers FROM `Job` WHERE Job_Status_Id = 5;";
 		
 		$query = $conn->prepare($sql);
 		$query->execute();

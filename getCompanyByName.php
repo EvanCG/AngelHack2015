@@ -10,7 +10,7 @@
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = "SELECT * FROM angelHackDb.Company WHERE Comp_Name = '$name';";
+		$sql = "SELECT Comp_Name, Comp_Info FROM angelHackDb.Company WHERE Comp_Name = '$name';";
 		$query = $conn->prepare($sql);
 		$query->execute();
 

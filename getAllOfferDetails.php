@@ -8,7 +8,23 @@
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = "SELECT COUNT(Job_Id) as NumInProgress FROM `Job` WHERE Job_Status_Id IN (1, 2, 3);";
+		$sql = "
+			SELECT
+				j.Job_Title as Job_Title
+				, c.Comp_Name as Company
+				, o.Decision_Date as Deadline
+				, o.Salary as Salary
+				, o.Stock as Stock
+				, o.Bonus as Bonus
+				, j.Job_Location as Location
+			FROM Job j
+			JOIN Company c
+			ON j.Company_Id = c.Comp_Id
+			JOIN Offer o
+			ON j.Job_id = o.Job_Id
+			ORDER BY
+				o.Decision_Date ASC
+		";
 		
 		$query = $conn->prepare($sql);
 		$query->execute();
