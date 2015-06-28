@@ -36,7 +36,7 @@ Get Dashboard Timeline:
 		Round_Type
 		
 Get all Rounds for an associated Job Id
-	http://evan.place/getRoundsForJobId.php?jobid=
+	http://evan.place/getRoundsForJobId.php?jobid=16
 	Require:
 		jobid
 	Return:
@@ -44,3 +44,17 @@ Get all Rounds for an associated Job Id
 		RoundType
 		Contact
 		Comment
+		
+####
+CREATE (* = required, all others pass empty string if no value)
+####
+
+Create new Job:
+	http://evan.place/createJob.php?jobTitle=Hacker&company=Microsoft&jobLocation=SF&dateDue=2015-07-20&contact=FakeEvan&comment=BestOneEver
+	Require:
+		* jobTitle
+		* company (must be one of companies in database for now)
+		* dateDue (format: YYYY-MM-DD)
+		jobLocation
+		contact
+		comment

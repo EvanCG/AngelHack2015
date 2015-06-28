@@ -8,7 +8,26 @@
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = "SELECT COUNT(Job_Id) as NumFollowUps FROM `Job` WHERE Job_Status_Id = 3 and Job_Deadline < NOW();";
+		$sql = "
+			SELECT
+				COUNT(Job_Id) as NumFollowUps
+			FROM `Job`
+			INNER JOIN (
+				SELECT round_id
+					, Round_due
+				FROM (
+					SELECT *
+					FROM Round
+					ORDER BY Job_Id
+						, Round_Due DESC
+						, Round_Id
+					) x
+				GROUP BY Job_Id
+				) mr ON r.Round_id = mr.Round_Id
+			WHERE
+				Job_Status_Id = 3 
+				and Job_Deadline < NOW()
+			;";
 		
 		$query = $conn->prepare($sql);
 		$query->execute();
