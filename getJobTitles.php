@@ -10,7 +10,7 @@
 
 		//$sql = "SELECT * FROM exploreuw.TOUR";
 
-		$sql = "SELECT Comp_Id, Comp_Name, Comp_Info FROM Company;";
+		$sql = "SELECT Job_Title FROM Job;";
 		$query = $conn->prepare($sql);
 		$query->execute();
 

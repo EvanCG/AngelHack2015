@@ -4,13 +4,26 @@
 	global $gUsername;
 	global $gPassword;
 	
+	$jobId = $_POST["jobId"];
+	$roundType = $_POST["roundType"];
+	$dateDue = $_POST["dateDue"];
+	$contact = $_POST["contact"];
+	$comment = $_POST["comment"];
+
 	try {
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		//$sql = "SELECT * FROM exploreuw.TOUR";
-
-		$sql = "SELECT Comp_Id, Comp_Name, Comp_Info FROM Company;";
+		$sql = "
+			INSERT INTO Round (Job_Id, Round_Due, Contact, Comments, Round_Type_Id)
+				VALUES(
+					$jobId
+					, '$dateDue'
+					, '$contact'
+					, '$comment'
+					, (SELECT Round_Type_Id FROM Round_Type WHERE Round_Type_Name = '$roundType')
+				);
+		";
 		$query = $conn->prepare($sql);
 		$query->execute();
 
@@ -27,4 +40,5 @@
 	} catch (PDOException $e) {
 		echo 'ERROR: ' . $e->getMessage();
 	}
+	
 ?>

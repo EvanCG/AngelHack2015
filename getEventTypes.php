@@ -4,26 +4,13 @@
 	global $gUsername;
 	global $gPassword;
 	
-	$jobType = $_GET["name"];
-	$resume = $_GET["resume"];
-	$coverLetter = $_GET["coverletter"];
-	$deadline = $_GET["deadline"];
-	
-	$testDate = new DateTime('2014-05-04 2:30:25');
-	$date = $testDate->format('Y-m-d H:i:s');
-	// $date = "2016-06-06";
-
-	$company = 'Google';
-	$jobStatus = 'Waiting to Apply';
-
 	try {
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		$sql = "
-			INSERT INTO Job (Job_Title, Resume, Cover_Letter, Job_Deadline, Company_Id, Job_Status_Id)
-			VALUES('SDE', 'Stanford', 'I want this', '$date', 2, 1)
-			;";
+		//$sql = "SELECT * FROM exploreuw.TOUR";
+
+		$sql = "SELECT Round_Type_Id, Round_Type_Name, Comp_Info FROM Round_Type;";
 		$query = $conn->prepare($sql);
 		$query->execute();
 
@@ -40,5 +27,4 @@
 	} catch (PDOException $e) {
 		echo 'ERROR: ' . $e->getMessage();
 	}
-	
 ?>

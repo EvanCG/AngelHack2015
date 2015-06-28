@@ -4,13 +4,24 @@
 	global $gUsername;
 	global $gPassword;
 	
+	$jobid = $_POST["JobID"];
+	$jobTitle = $_POST["jobTitle"];
+	$company = $_POST["company"];
+	$jobLocation = $_POST["jobLocation"];
+
 	try {
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		//$sql = "SELECT * FROM exploreuw.TOUR";
-
-		$sql = "SELECT Comp_Id, Comp_Name, Comp_Info FROM Company;";
+		$sql = "
+			UPDATE Job
+			SET 
+				Job_Title='$jobTitle'
+				, Company_Id=(SELECT Comp_Id FROM Company WHERE Comp_Name = '$company')
+				, Job_Location='$JobLocation'
+			WHERE Job_Id='$jobid';
+			);
+		";
 		$query = $conn->prepare($sql);
 		$query->execute();
 
@@ -27,4 +38,5 @@
 	} catch (PDOException $e) {
 		echo 'ERROR: ' . $e->getMessage();
 	}
+	
 ?>

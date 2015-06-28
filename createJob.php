@@ -4,14 +4,14 @@
 	global $gUsername;
 	global $gPassword;
 	
-	$jobTitle = $_GET["jobTitle"];
-	$company = $_GET["company"];
-	$jobLocation = $_GET["jobLocation"];
-	$dateDue = $_GET["dateDue"];
-	$contact = $_GET["contact"];
-	$comment = $_GET["comment"];
+	$jobTitle = $_POST["jobTitle"];
+	$company = $_POST["company"];
+	$jobLocation = $_POST["jobLocation"];
+	$dateDue = $_POST["dateDue"];
+	$contact = $_POST["contact"];
+	$comment = $_POST["comment"];
 
-	try {
+	// try {
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -32,21 +32,21 @@
 					, (SELECT Round_Type_Id FROM Round_Type WHERE Round_Type_Name = 'Application Drop')
 				);
 		";
-		$query = $conn->prepare($sql);
-		$query->execute();
+	// 	$query = $conn->prepare($sql);
+	// 	$query->execute();
 
-		$result = $query->fetchall(PDO::FETCH_ASSOC);
-		if (count($result)) {
-			$return_array = array();
-			foreach($result as $row) {
-				array_push($return_array, $row);
-			}
-			echo json_encode($return_array);
-		} else {
-			echo json_encode();
-		}
-	} catch (PDOException $e) {
-		echo 'ERROR: ' . $e->getMessage();
-	}
+	// 	$result = $query->fetchall(PDO::FETCH_ASSOC);
+	// 	if (count($result)) {
+	// 		$return_array = array();
+	// 		foreach($result as $row) {
+	// 			array_push($return_array, $row);
+	// 		}
+	// 		echo json_encode($return_array);
+	// 	} else {
+	// 		echo json_encode();
+	// 	}
+	// } catch (PDOException $e) {
+	// 	echo 'ERROR: ' . $e->getMessage();
+	// }
 	
 ?>

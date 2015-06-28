@@ -4,13 +4,25 @@
 	global $gUsername;
 	global $gPassword;
 	
+	$roundId = $_GET["roundId"];
+	$roundType = $_GET["roundType"];
+	$dateDue = $_GET["dateDue"];
+	$contact = $_GET["contact"];
+	$comment = $_GET["comment"];
+
 	try {
 		$conn = new PDO($gDB_PDO_conn_string, $gUsername, $gPassword);
 		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-		//$sql = "SELECT * FROM exploreuw.TOUR";
-
-		$sql = "SELECT Comp_Id, Comp_Name, Comp_Info FROM Company;";
+		$sql = "
+			UPDATE Round
+			SET 
+				Round_Due='$dateDue'
+				, Contact='$contact'
+				, Comments='$comment'
+				, Round_Type_Id=(SELECT Round_Type_Id FROM Round_Type WHERE Round_Type_Name = '$roundType')
+			WHERE Round_Id='$roundId';
+		";
 		$query = $conn->prepare($sql);
 		$query->execute();
 
@@ -27,4 +39,5 @@
 	} catch (PDOException $e) {
 		echo 'ERROR: ' . $e->getMessage();
 	}
+	
 ?>

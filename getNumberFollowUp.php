@@ -10,23 +10,42 @@
 
 		$sql = "
 			SELECT
-				COUNT(Job_Id) as NumFollowUps
-			FROM `Job`
-			INNER JOIN (
-				SELECT round_id
-					, Round_due
-				FROM (
-					SELECT *
-					FROM Round
-					ORDER BY Job_Id
-						, Round_Due DESC
-						, Round_Id
-					) x
-				GROUP BY Job_Id
-				) mr ON r.Round_id = mr.Round_Id
+				COUNT(round_Id) as NumFollowUps
+			FROM (
+					SELECT
+						r.round_id as round_Id
+						, r.Round_Due AS Date_Due
+						, j.Job_Title AS Title
+						, c.Comp_Name AS Company
+						, CASE
+							WHEN r.Round_Due <= CURDATE()
+								THEN 'Follow Up'
+							WHEN r.Round_Due > CURDATE()
+								THEN 'Upcoming'
+							END AS Action_Type
+						, rt.Round_Type_Name AS Round_Type
+					FROM Round r
+					INNER JOIN Job j ON r.Job_Id = j.Job_Id
+					INNER JOIN Company c ON j.Company_Id = c.Comp_Id
+					INNER JOIN Job_Status js ON j.Job_Status_Id = js.Job_Status_Id
+					INNER JOIN Round_Type rt ON r.Round_Type_Id = rt.Round_Type_Id
+					INNER JOIN (
+						SELECT round_id
+							, Round_due
+						FROM (
+							SELECT *
+							FROM Round
+							ORDER BY Job_Id
+								, Round_Due DESC
+								, Round_Id
+							) x
+						GROUP BY Job_Id
+						) mr ON r.Round_id = mr.Round_Id
+					WHERE js.Job_Stage <> 'Rejected'
+					ORDER BY r.Round_Due ASC
+				) y
 			WHERE
-				Job_Status_Id = 3 
-				and Job_Deadline < NOW()
+				Action_Type = 'Follow Up'
 			;";
 		
 		$query = $conn->prepare($sql);
