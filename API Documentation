@@ -1,0 +1,10 @@
+User Creates Job
+	User Input:
+		Job Type
+		Resume
+		Cover Letter
+	Retrieve:
+		Company from drop down
+		(If not present, 'other' and user supplied)
+	Auto:
+		Job ID
