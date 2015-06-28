@@ -25,3 +25,8 @@ Get Table Info about Offers:
 		Stock
 		Bonus
 		Location
+		
+Get Dashboard Timeline:
+	http://evan.place/getTimeline.php
+	Return: (Sorted by deadline, nearest highest)
+	
