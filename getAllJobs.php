@@ -12,11 +12,11 @@
 
 		$sql = "
 			SELECT
-				r.round_id as round_Id
-				, r.Round_Due AS Date_Due
+				j.Job_Id as Job_Id
+				, r.Round_Due AS Next_Date
 				, j.Job_Title AS Title
 				, c.Comp_Name AS Company
-				, CASE
+				, CASE 
 					WHEN r.Round_Due <= CURDATE()
 						THEN 'Follow Up'
 					WHEN r.Round_Due > CURDATE()

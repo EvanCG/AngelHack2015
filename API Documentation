@@ -26,7 +26,7 @@ Get Table Info about Offers:
 		Bonus
 		Location
 		
-Get Dashboard Timeline:
+Get Dashboard Timeline with Round ID:
 	http://evan.place/getTimeline.php
 	Return:
 		Date_Due (sorted, nearest first)
@@ -44,6 +44,16 @@ Get all Rounds for an associated Job Id
 		RoundType
 		Contact
 		Comment
+		
+Get all jobs w/ the job ID
+	http://evan.place/getAllJobs.php
+	Return:
+		Job_Id
+		Next_Date
+		Title
+		Company
+		Action_Type
+		Round_Type
 		
 ####
 CREATE (* = required, all others pass empty string if no value)
