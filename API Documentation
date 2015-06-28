@@ -1,18 +1,18 @@
-Get Number of Offers:
+Get the number of offers received:
 	http://evan.place/getNumberOfOffers.php
 	Return:
-		NumOffers # The number of offers received
+		NumOffers 
 		
 
-Get number of In Progress:
+Get number of jobs in progress:
 	http://evan.place/getNumberInProgress.php
 	Return:
-		NumInProgress # The number of jobs in progress
+		NumInProgress 
 
-Get number to Follow Up:
+Get number The number of jobs to follow up with:
 	http://evan.place/getNumberFollowUp.php
 	Return:
-		NumFollowUps # The number of jobs to follow up with
+		NumFollowUps 
 	
 Get Table Info about Offers:
 	http://evan.place/getAllOfferDetails.php
@@ -28,5 +28,19 @@ Get Table Info about Offers:
 		
 Get Dashboard Timeline:
 	http://evan.place/getTimeline.php
-	Return: (Sorted by deadline, nearest highest)
-	
+	Return:
+		Date_Due (sorted, nearest first)
+		Title
+		Company
+		Action_Type
+		Round_Type
+		
+Get all Rounds for an associated Job Id
+	http://evan.place/getRoundsForJobId.php?jobid=
+	Require:
+		jobid
+	Return:
+		RoundId
+		RoundType
+		Contact
+		Comment
